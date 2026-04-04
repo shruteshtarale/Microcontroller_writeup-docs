@@ -1,0 +1,49 @@
+/******************************************************************************
+ * File Name   : uart_tx_rx.c
+ * Description : UART transmit and receive
+ ******************************************************************************/
+
+#include <avr/io.h>
+
+/* Function Prototypes */
+void UART_Init(unsigned int baud);
+void UART_Transmit(char data);
+char UART_Receive(void);
+
+/* Main Function */
+int main(void)
+{
+    UART_Init(9600);
+
+    while (1)
+    {
+        char data = UART_Receive();
+        UART_Transmit(data); // Echo back
+    }
+}
+
+/* UART Initialization */
+void UART_Init(unsigned int baud)
+{
+    unsigned int ubrr = F_CPU/16/baud - 1;
+
+    UBRR0H = (ubrr >> 8);
+    UBRR0L = ubrr;
+
+    UCSR0B = (1 << RXEN0) | (1 << TXEN0);
+    UCSR0C = (1 << UCSZ01) | (1 << UCSZ00);
+}
+
+/* Transmit Data */
+void UART_Transmit(char data)
+{
+    while (!(UCSR0A & (1 << UDRE0)));
+    UDR0 = data;
+}
+
+/* Receive Data */
+char UART_Receive(void)
+{
+    while (!(UCSR0A & (1 << RXC0)));
+    return UDR0;
+}
