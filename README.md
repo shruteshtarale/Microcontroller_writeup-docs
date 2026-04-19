@@ -117,3 +117,27 @@ int main() {
 │── Projects/
 │   ├── Smart_Home/
 │   ├── Temperature_System/
+
+
+*Types of Microcontrollers
+
+-> Microcontrollers are classified based on architecture, bit size, instruction set, and application.
+
+   1. Based on Bit Size
+   * 8-bit Microcontrollers
+      Processes 8-bit data at a time
+      Simple and low cost
+     Used in basic embedded systems
+
+ Examples:
+  8051
+  ATmega328 (Arduino)
+  PIC16F877A
+
+   Use cases:
+   LED control
+   Small automation systems
+   
+   16-bit Microcontrollers
+   32-bit Microcontrollers
+      
